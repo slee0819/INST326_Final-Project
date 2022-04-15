@@ -2,4 +2,24 @@
 ning 
 Sang 
 Miguel - Can yall see my changes??
+
+#Functions
+"""
+def main_menu()
+"""
+User interface pop-up of the contact list
+
+  Pseudocode:
+    - Welcome user
+    - Initiate an empty contact list
+    - Switch cases; 
+"""
+def search_contact()
+def enter_contact()
+def delete_contact()
+
+
+"""
+
+
 ###
