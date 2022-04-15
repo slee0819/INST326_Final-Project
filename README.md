@@ -1,7 +1,8 @@
 # INST326_Final-Project
 
 
-# PROBLEM: I can never keep track of all my contacts because I have too many friends. I'm just too popular for my own good. 
+# PROBLEM:
+I can never keep track of all my contacts because I have too many friends. I'm just too popular for my own good. 
 
 
 # Overview of the project. 
