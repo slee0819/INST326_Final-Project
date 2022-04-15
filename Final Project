@@ -1,7 +1,7 @@
 ### 
 ning 
 Sang 
-Miguel - Can yall see my changes??
+Miguel
 
 #Functions
 """
@@ -17,6 +17,9 @@ User interface pop-up of the contact list
 def search_contact()
 def enter_contact()
 def delete_contact()
+def frequently_used()
+def retrieve_number()
+def retrieve_email()
 
 
 """
