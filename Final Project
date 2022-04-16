@@ -1,0 +1,49 @@
+### 
+Ningyuan 
+Sang 
+Miguel
+
+#Functions
+
+
+def main_menu()
+"""
+User interface pop-up of the contact list
+
+  Pseudocode:
+    - Welcome user
+    - Initiate an empty contact list
+    - User limited to Switch cases 
+        - Search Contact, Enter Contact, Delete Contact, Frequently Used, Retrieve Number, Retrieve Email, Quit
+"""
+
+
+def search_contact()
+def search_number()
+def search_email()
+
+
+
+
+def enter_contact()
+"""
+It collects contact information of first name, last name, phone number, and email
+"""
+
+
+def delete_contact()
+"""
+It deletes a contact information based of user input of first name, last name, phone number, and email
+"""
+
+
+def frequently_used()
+"""
+
+"""
+
+
+"""
+
+
+###
