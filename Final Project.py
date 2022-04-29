@@ -20,11 +20,22 @@ class Contact:
         print("E-mail: ", self.e_mail)
         print("Address: ", self.addr)
 
-#This is a function that checks to see if the defined contact class works properly, and creates an instance of the class.
-def run():
-    Lee = Contact('Sang Hwa Lee', '410-292-7470', 'sanghwa4341@gmail.com', 'College Park ')
-    Lee.print_info()
+def set_contact():
+    name = input("Name : ")
+    phone_number = input("Phone Number : ")
+    e_mail = input("Adress : ")
+    addr = input("Address : ")
+    contact = Contact(name, phone_number, e_mail, addr)
+    return contact
+
+def print_contact(contact_list) :
+    for contact in contact_list :
+        contact.print_info()
+
+def delete_contact(contact_list, name) :
+    for i, contact in enumerate(contact_list) :
+        if contact.name == name :
+            del contact_list[i]
 
 
 if __name__ == "__main__":
-    run()
