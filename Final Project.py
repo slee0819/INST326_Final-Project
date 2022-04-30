@@ -46,8 +46,7 @@ def delete_contact(contact_list, name) :
 def load_contact(contact_list):
     f = open("contact_db.txt", "rt")
     lines = f.readlines()
-    num = len(lines) / 4
-    num = int(num)
+
 
 # Set up basic functions to configure the main menu. A loop is used to ensure that it runs in a non-terminating state once used.
 def print_menu():
@@ -68,9 +67,13 @@ def run():
         if menu == 1:
             contact = set_contact()
             contact_list.append(contact)
+        elif menu == 2:
+            print_contact(contact_list)
+        elif menu == 3:
+            name = input("Name: ")
+            delete_contact(contact_list, name)
         elif menu == 4:
             break
-
 
 if __name__ == "__main__":
     run()
