@@ -1,10 +1,10 @@
 # Team 11:58Pm( Sang Hwa Lee, Ningyuan Zhang, Miguel Rodriguez)
 # INST326 - Final Project 
 
-# Class to represent people's address book
+# Define a class "Contact" 
 class Contact:
 
-    # The init function that we have to initialize a variable easily.
+    # Declare the constructor for the class instance (name, phone number, email, address).
     def __init__(self, name, phone_number, e_mail, addr):
         
         self.name = name
@@ -12,7 +12,7 @@ class Contact:
         self.e_mail = e_mail
         self.addr = addr
     
-    # A function to take and output information.
+    # Prints the information stored in the instance variable to the screen.
     def print_info(self):
 
         print("Name: ", self.name)
@@ -20,13 +20,25 @@ class Contact:
         print("E-mail: ", self.e_mail)
         print("Address: ", self.addr)
 
+# Newly define the set_contact function, which is a function that receives data from the user.
 def set_contact():
+
     name = input("Name : ")
     phone_number = input("Phone Number : ")
     e_mail = input("Adress : ")
     addr = input("Address : ")
     contact = Contact(name, phone_number, e_mail, addr)
     return contact
+
+# Set up basic functions to configure the main menu. A loop is used to ensure that it runs in a non-terminating state once used.
+def print_menu():
+
+    print("1. Input the contact information")
+    print("2. Output the contact information")
+    print("3. Delete the contact information ")
+    print("4. END")
+    menu = input("Select the Menu: ")
+    return int(menu)
 
 def print_contact(contact_list) :
     for contact in contact_list :
