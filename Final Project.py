@@ -25,10 +25,27 @@ def set_contact():
 
     name = input("Name : ")
     phone_number = input("Phone Number : ")
-    e_mail = input("Adress : ")
+    e_mail = input("E_mail : ")
     addr = input("Address : ")
     contact = Contact(name, phone_number, e_mail, addr)
     return contact
+    
+# Procedure for outputting information stored in an instance with contact_list to output the entered contact.
+def print_contact(contact_list) :
+    for contact in contact_list :
+        contact.print_info()
+
+# In order to delete a contact from the contact list, we have to write the delete_contact function.
+def delete_contact(contact_list, name) :
+    for i, contact in enumerate(contact_list) :
+        if contact.name == name :
+            del contact_list[i]
+
+def load_contact(contact_list):
+    f = open("contact_db.txt", "rt")
+    lines = f.readlines()
+    num = len(lines) / 4
+    num = int(num)
 
 # Set up basic functions to configure the main menu. A loop is used to ensure that it runs in a non-terminating state once used.
 def print_menu():
@@ -40,14 +57,18 @@ def print_menu():
     menu = input("Select the Menu: ")
     return int(menu)
 
-def print_contact(contact_list) :
-    for contact in contact_list :
-        contact.print_info()
-
-def delete_contact(contact_list, name) :
-    for i, contact in enumerate(contact_list) :
-        if contact.name == name :
-            del contact_list[i]
+# Modify the run function to call the set_contact function when the user selects menu 1. 
+# Also, let's create a list data structure named contact_list to store the Contact instance, which is the return value of the set_contact function, and add the created instance to the list.
+def run():
+    contact_list = []
+    while 1:
+        menu = print_menu()
+        if menu == 1:
+            contact = set_contact()
+            contact_list.append(contact)
+        elif menu == 4:
+            break
 
 
 if __name__ == "__main__":
+    run()
