@@ -57,19 +57,8 @@ def search_contact():
     delete_name = input("Enter Contact's First Name: ")
     rem_name = delete_name[1:]
     first_char = delete_name[0]
-    delete_name = first_char.upper() + rem_name
-    file1 = open(file_name, "r+")
-    file_contents = file1.readlines()
-     
-    found = False   
-    for line in file_contents:
-        if delete_name in line:
-            delete_name.pop(list)
-            found=True
-            print(delete_name + " is no linger in the Contact List")
-            break
-    if  found == False:
-        print(delete_name + "is not in the Contact List")
+    #Still working on the delet function, looking for a way to delet records from our table.
+    #Might need a loop to check if the phone number still exits after deleting
     
     
 
