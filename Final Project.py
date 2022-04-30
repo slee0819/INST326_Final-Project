@@ -20,32 +20,58 @@ class Contact:
         print("E-mail: ", self.e_mail)
         print("Address: ", self.addr)
 
-# Newly define the set_contact function, which is a function that receives data from the user.
+# A function that receives data from the user.
 def set_contact():
 
     name = input("Name : ")
     phone_number = input("Phone Number : ")
-    e_mail = input("E_mail : ")
+    e_mail = input("Adress : ")
     addr = input("Address : ")
     contact = Contact(name, phone_number, e_mail, addr)
     return contact
+
+# A function that searches for a contact name
+def search_contact():
     
-# Procedure for outputting information stored in an instance with contact_list to output the entered contact.
-def print_contact(contact_list) :
-    for contact in contact_list :
-        contact.print_info()
+    search_name = input("Enter Contact's First Name: ")
+    rem_name = search_name[1:]
+    first_char = search_name[0]
+    search_name = first_char.upper() + rem_name
+    file1 = open(file_name, "r+")
+    file_contents = file1.readlines()
+     
+    found = False   
+    for line in file_contents:
+        if search_name in line:
+            print("Contact Information: ")
+            print(line)
+            found=True
+            break
+    if  found == False:
+        print(search_name + "is not in the Contact List")
+  
 
-# In order to delete a contact from the contact list, we have to write the delete_contact function.
-def delete_contact(contact_list, name) :
-    for i, contact in enumerate(contact_list) :
-        if contact.name == name :
-            del contact_list[i]
-
-def load_contact(contact_list):
-    f = open("contact_db.txt", "rt")
-    lines = f.readlines()
-    num = len(lines) / 4
-    num = int(num)
+# A function that deletes a contact
+ def delete_contact():
+        
+    delete_name = input("Enter Contact's First Name: ")
+    rem_name = delete_name[1:]
+    first_char = delete_name[0]
+    delete_name = first_char.upper() + rem_name
+    file1 = open(file_name, "r+")
+    file_contents = file1.readlines()
+     
+    found = False   
+    for line in file_contents:
+        if delete_name in line:
+            delete_name.pop(list)
+            found=True
+            print(delete_name + " is no linger in the Contact List")
+            break
+    if  found == False:
+        print(delete_name + "is not in the Contact List")
+    
+    
 
 # Set up basic functions to configure the main menu. A loop is used to ensure that it runs in a non-terminating state once used.
 def print_menu():
@@ -57,18 +83,4 @@ def print_menu():
     menu = input("Select the Menu: ")
     return int(menu)
 
-# Modify the run function to call the set_contact function when the user selects menu 1. 
-# Also, let's create a list data structure named contact_list to store the Contact instance, which is the return value of the set_contact function, and add the created instance to the list.
-def run():
-    contact_list = []
-    while 1:
-        menu = print_menu()
-        if menu == 1:
-            contact = set_contact()
-            contact_list.append(contact)
-        elif menu == 4:
-            break
-
-
 if __name__ == "__main__":
-    run()
