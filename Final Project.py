@@ -42,7 +42,7 @@ def delete_contact(contact_list, name) :
             del contact_list[i]
 
             
-#After receiving a list called contact_list, this function iterates through the Contact instances in the list and saves the data to a file.
+# After receiving a list called contact_list, this function iterates through the Contact instances in the list and saves the data to a file.
 def load_contact(contact_list):
     f = open("contact_db.txt", "rt")
     lines = f.readlines()
