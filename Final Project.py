@@ -42,11 +42,30 @@ def delete_contact(contact_list, name) :
             del contact_list[i]
 
             
-# After receiving a list called contact_list, this function iterates through the Contact instances in the list and saves the data to a file.
 def load_contact(contact_list):
     f = open("contact_db.txt", "rt")
     lines = f.readlines()
+    num = len(lines) / 4
+    num = int(num)
 
+    for i in range(num):
+        name = lines[4*i].rstrip('\n')
+        phone = lines[4*i+1].rstrip('\n')
+        email = lines[4*i+2].rstrip('\n')
+        addr = lines[4*i+3].rstrip('\n')
+        contact = Contact(name, phone, email, addr)
+        contact_list.append(contact)
+    f.close()
+            
+# After receiving a list called contact_list, this function iterates through the Contact instances in the list and saves the data to a file.
+def store_contact(contact_list):
+    f = open("contact_db.txt", "wt")
+    for contact in contact_list:
+        f.write(contact.name + '\n')
+        f.write(contact.phone_number + '\n')
+        f.write(contact.e_mail + '\n')
+        f.write(contact.addr + '\n')
+    f.close()
 
 # Set up basic functions to configure the main menu. A loop is used to ensure that it runs in a non-terminating state once used.
 def print_menu():
