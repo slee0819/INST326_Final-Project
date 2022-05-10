@@ -1,98 +1,110 @@
 # Team 11:58Pm( Sang Hwa Lee, Ningyuan Zhang, Miguel Rodriguez)
 # INST326 - Final Project 
 
-# Define a class "Contact" 
-class Contact:
+import sqlite3
+conn = sqlite3.connect('Final Project.db')
+conn.close()
 
-    # Declare the constructor for the class instance (name, phone number, email, address).
-    def __init__(self, name, phone_number, e_mail, addr):
-        
-        self.name = name
-        self.phone_number = phone_number
-        self.e_mail = e_mail
-        self.addr = addr
-    
-    # Prints the information stored in the instance variable to the screen.
-    def print_info(self):
-
-        print("Name: ", self.name)
-        print("Phone Number: ", self.phone_number)
-        print("E-mail: ", self.e_mail)
-        print("Address: ", self.addr)
-
-# Newly define the set_contact function, which is a function that receives data from the user.
-def set_contact():
-
-    name = input("Name : ")
-    phone_number = input("Phone Number : ")
-    e_mail = input("E_mail : ")
-    addr = input("Address : ")
-    contact = Contact(name, phone_number, e_mail, addr)
-    return contact
-    
-# Procedure for outputting information stored in an instance with contact_list to output the entered contact.
-def print_contact(contact_list) :
-    for contact in contact_list :
-        contact.print_info()
-
-# In order to delete a contact from the contact list, we have to write the delete_contact function.
-def delete_contact(contact_list, name) :
-    for i, contact in enumerate(contact_list) :
-        if contact.name == name :
-            del contact_list[i]
-
-            
-def load_contact(contact_list):
-    f = open("contact_db.txt", "rt")
-    lines = f.readlines()
-    num = len(lines) / 4
-    num = int(num)
-
-    for i in range(num):
-        name = lines[4*i].rstrip('\n')
-        phone = lines[4*i+1].rstrip('\n')
-        email = lines[4*i+2].rstrip('\n')
-        addr = lines[4*i+3].rstrip('\n')
-        contact = Contact(name, phone, email, addr)
-        contact_list.append(contact)
-    f.close()
-            
-# After receiving a list called contact_list, this function iterates through the Contact instances in the list and saves the data to a file.
-def store_contact(contact_list):
-    f = open("contact_db.txt", "wt")
-    for contact in contact_list:
-        f.write(contact.name + '\n')
-        f.write(contact.phone_number + '\n')
-        f.write(contact.e_mail + '\n')
-        f.write(contact.addr + '\n')
-    f.close()
-
-# Set up basic functions to configure the main menu. A loop is used to ensure that it runs in a non-terminating state once used.
-def print_menu():
-
-    print("1. Input the contact information")
-    print("2. Output the contact information")
-    print("3. Delete the contact information ")
-    print("4. END")
-    menu = input("Select the Menu: ")
-    return int(menu)
-
-# Modify the run function to call the set_contact function when the user selects menu 1. 
-# Also, let's create a list data structure named contact_list to store the Contact instance, which is the return value of the set_contact function, and add the created instance to the list.
-def run():
-    contact_list = []
-    while 1:
-        menu = print_menu()
-        if menu == 1:
-            contact = set_contact()
-            contact_list.append(contact)
-        elif menu == 2:
-            print_contact(contact_list)
-        elif menu == 3:
-            name = input("Name: ")
-            delete_contact(contact_list, name)
-        elif menu == 4:
+def insert():
+    phoneNum = input('Enter Phone Number:\n')
+    name = input('Enter Name:\n')
+    email = input('Enter Email:\n')
+    address = input('Enter Address:\n')
+    sql1 = 'insert into MT(Phone,NAME,EMAIL,ADDRESS,ADDRESS)'
+    sql1 += 'values("%d","%s","%d","%s");'%(phoneNum,name,email,address)
+    conn.execute(sql1)
+    conn.commit()
+    print ("Records insert successfully")
+ 
+def delete():
+    name = input("Enter the name you wish to delete:")
+    cursor = conn.execute("SELECT name from MT where name = '%s';"%name)
+    for row in cursor:
+        if name == row[0]:
+            conn.execute("DELETE from MT where name = '%s';"%name)
+            conn.commit()
+            print ("Records delete successfully")
             break
+    else:
+        print ("Sorry,this user is not exist")
 
-if __name__ == "__main__":
-    run()
+def modify():
+    name = input("Enter the name you wish to change:")
+    sql4 = "phoneNum, name, email, address from MT where name = '%s';"%name
+    cursor = conn.execute(sql4)
+    x = input("Enter the phone number you wish to change:")
+    y = input("Enter the email you wish to change:")
+    z = input("Enter the address you wish to change:")
+    sql3 = "UPDATE MT set phone number = '%s',email = '%d',\
+        address = '%d' where name = '%s';"%(x,y,z,name)
+    conn.execute(sql3)
+    conn.commit()
+    print ("Updata complete")
+    sql5 = "SELECT phoneNum, name, email, address from MT where name = '%s';"%name
+    cursor = conn.execute(sql5)
+    for row in cursor:
+        print ("phoneNum", row[0])
+        print ("name = ", row[1])
+        print ("email = ",row[2])
+        print ("address = ", row[3]),"\n"
+
+conn = sqlite3.connect('Final Project.db')
+
+def search():
+    conn = sqlite3.connect('Final Project.db')
+    name = input('Enter the name you want to search')
+    sql2 = "SELECT phoneNum, name, email, address from MT where name = '%s';" % (name)
+    cursor = conn.execute(sql2)
+    for row in cursor:
+        print ("phoneNum", row[0])
+        print ("name = ", row[1])
+        print ("email = ",row[2])
+        print ("address = ", row[3]), "\n"
+        break
+    else:
+        print ("Sorry,no information")
+
+def showall():
+    cursor = conn.execute("SELECT phoneNum, name, email, address from MT")
+    for row in cursor:
+        print ("phoneNum", row[0])
+        print ("name = ", row[1])
+        print ("email = ",row[2])
+        print ("address = ", row[3]), "\n"
+    print ("Complete")
+    cursor = conn.execute("select count(*) from MT;")
+    for row in cursor:
+        print ("A total of %d user")%row[0]
+
+def menu():
+    print ('1.Add Contact')
+    print ('2.Delet Contact')
+    print ('3.Modify Contact')
+    print ('4.Search Contact')
+    print ('5.Show All Contact')
+    print ('6.Exit')
+while True:
+    menu()
+    x = input('Enter a Number:')
+    if x == '1':
+        insert()
+        continue
+    if x == '2':
+        delete()
+        continue
+    if x == '3':
+        modify()
+        continue
+    if x == '4':
+        search()
+        continue
+    if x == '5':
+        showall()
+        continue
+    if x == '6':
+        print ("Thanks for using!")
+        exit()
+        continue
+    else:
+        print ("This option is not exits, enter again")
+        continue
