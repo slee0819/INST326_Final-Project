@@ -15,13 +15,28 @@ cursor.execute(sql)
 conn.commit()
 
 class Contact:
+	"""A contact book that can create, print, insert, delete, modify, and search a contact from a list
+	"""
     def __init__(self, name, phoneNum, email, address):
+	"""Contact constructor
+	
+	Attributes:
+		name: full name of the contact
+		phoneNum: phone number of the contact
+		email: electronic address of contact
+		address: residential address of contact
+	"""
         self.name = name
         self.phoneNum = phoneNum
         self.e_mail = email
         self.addr = address
 
     def print_info(self):
+	""""Prints the contact object that was created
+	
+	Side effects:
+		Prints information to the console
+	"""
         print("Name: ", self.name)
         print("Phone Number: ", self.phoneNum)
         print("E-mail: ", self.email)
