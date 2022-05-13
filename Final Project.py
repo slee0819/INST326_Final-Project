@@ -6,6 +6,18 @@ conn = sqlite3.connect('Final Project.db')
 conn.close()
 
 def insert():
+    """Inserts a contact to the contact list.
+    
+    Args:
+        phoneNum: phone number of the contact
+        name: full name of the contact
+        email: electronic address of contact
+        address: residential address of contact
+    Side effects:
+        Creates a contact object 
+        Prints information to the console
+    """
+    
     phoneNum = input('Enter Phone Number:\n')
     name = input('Enter Name:\n')
     email = input('Enter Email:\n')
@@ -17,6 +29,15 @@ def insert():
     print ("Records insert successfully")
  
 def delete():
+    """Deletes a contact from the contact list.
+    
+    Args:
+        name: full name of the contact
+
+    Side Effects:
+        Deletes the contact object
+        Prints information to the console
+    """
     name = input("Enter the name you wish to delete:")
     cursor = conn.execute("SELECT name from MT where name = '%s';"%name)
     for row in cursor:
@@ -29,6 +50,18 @@ def delete():
         print ("Sorry,this user is not exist")
 
 def modify():
+    """Modifys a contact from the contact list
+    
+    Args:
+        name: full name of the contact
+        x: the updated phone number
+        y: the updated email
+        z: the updated address
+    
+    Sides Effects:
+        Modifys the contact information
+        Prints information to the console
+    """
     name = input("Enter the name you wish to change:")
     sql4 = "phoneNum, name, email, address from MT where name = '%s';"%name
     cursor = conn.execute(sql4)
@@ -39,7 +72,7 @@ def modify():
         address = '%d' where name = '%s';"%(x,y,z,name)
     conn.execute(sql3)
     conn.commit()
-    print ("Updata complete")
+    print ("Update complete")
     sql5 = "SELECT phoneNum, name, email, address from MT where name = '%s';"%name
     cursor = conn.execute(sql5)
     for row in cursor:
@@ -51,6 +84,15 @@ def modify():
 conn = sqlite3.connect('Final Project.db')
 
 def search():
+    """Searches a contact from the contact list
+    
+    Args:
+        name: full name of the contact
+        
+    Side Effects:
+        Prints information to the console
+    
+    """
     conn = sqlite3.connect('Final Project.db')
     name = input('Enter the name you want to search')
     sql2 = "SELECT phoneNum, name, email, address from MT where name = '%s';" % (name)
@@ -62,9 +104,14 @@ def search():
         print ("address = ", row[3]), "\n"
         break
     else:
-        print ("Sorry,no information")
+        print ("Sorry, this contact does not exist")
 
 def showall():
+    """Show all the contacts in the contact list
+    
+    Side Effects:
+        Prints information to the console
+    """
     cursor = conn.execute("SELECT phoneNum, name, email, address from MT")
     for row in cursor:
         print ("phoneNum", row[0])
